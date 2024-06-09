@@ -6,28 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const http_1 = require("http");
 const socket_io_1 = require("socket.io");
+const publicChatServices_1 = require("./src/BL/services/socketServices/publicChatServices");
 const app = (0, express_1.default)();
 const httpServer = (0, http_1.createServer)(app);
 const PORT = 4000;
+app.use(require("cors")());
 const io = new socket_io_1.Server(httpServer, {
-/* options */
+    /* options */
+    cors: {
+        origin: "http://localhost:5173",
+    },
 });
-io.on("connection", (socket) => {
-    // ...
-});
+(0, publicChatServices_1.publicChatSocketServices)(io);
 httpServer.listen(PORT, () => {
     console.log(`i'm listening, http://localhost:${PORT}/`);
 });
 app.get("/", (req, res) => {
     res.send("hello world!!!");
 });
-// import express, { Express, Request, Response } from "express";
-// import db from "./src/DL/DB";
-// const app: Express = express();
-// const PORT = 4000;
-// app.get("/", (req: Request, res: Response) => {
-//   res.send("hello world!!!");
-// });
-// app.listen(PORT, () => {
-//   console.log(`i'm listening, http://localhost:${PORT}/`);
-// });

@@ -2,7 +2,6 @@ import express, { Express, Request, Response } from "express";
 import db from "./src/DL/DB";
 import { createServer } from "http";
 import { Server } from "socket.io";
-
 import { publicChatSocketServices } from "./src/BL/services/socketServices/publicChatServices";
 
 const app: Express = express();

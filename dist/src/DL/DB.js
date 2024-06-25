@@ -8,7 +8,6 @@ const better_sqlite3_1 = __importDefault(require("better-sqlite3"));
 const chat_room_1 = require("./models/chat-room");
 const user_1 = require("./models/user");
 const message_1 = require("./models/message");
-const chat_rooms_controller_1 = __importDefault(require("./controllers/chat-rooms.controller"));
 const db = new better_sqlite3_1.default("univerchat.db", { verbose: console.log });
 exports.db = db;
 db.pragma("journal_mode = WAL");
@@ -16,7 +15,5 @@ const initializeDB = () => {
     (0, user_1.createUsersTable)(db);
     (0, message_1.createMessagesTable)(db);
     (0, chat_room_1.createChatRoomsTable)(db);
-    const log = chat_rooms_controller_1.default.readOne("10");
-    console.log((log === null || log === void 0 ? void 0 : log.name) + " wwwwwwwwww");
 };
 exports.initializeDB = initializeDB;

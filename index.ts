@@ -6,7 +6,7 @@ import { publicChatSocketServices } from "./src/BL/services/socketServices/publi
 
 const app: Express = express();
 const httpServer = createServer(app);
-const PORT = 4000;
+const PORT = process.env.PORT || 4001;
 app.use(require("cors")());
 app.use(express.json());
 

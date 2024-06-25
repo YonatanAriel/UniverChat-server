@@ -54,21 +54,20 @@ class ChatRoomsController {
     return hasUpdated;
   }
 
-  //not working - need fix
-  //   static updateMany(updates: ChatRoom[]) {
-  //     const transaction = db.transaction((updates: ChatRoom[]) => {
-  //       const statement =
-  //         db.prepare(`UPDATE chat_rooms SET name = COALESCE(:name, name), WHERE id = :id
-  //         `);
-  //       for (const update of updates) {
-  //         statement.run({
-  //           id: update.id,
-  //           name: update.name,
-  //         });
-  //       }
-  //     });
-  //     transaction(updates);
-  //   }
+  static updateMany(updates: ChatRoom[]) {
+    const transaction = db.transaction((updates: ChatRoom[]) => {
+      const statement =
+        db.prepare(`UPDATE chat_rooms SET name = COALESCE(:name, name) WHERE id = :id
+          `);
+      for (const update of updates) {
+        statement.run({
+          id: update.id,
+          name: update.name,
+        });
+      }
+    });
+    transaction(updates);
+  }
 
   static delete(id: string) {
     const statement = db.prepare("DELETE FROM chat_rooms WHERE id = ?");

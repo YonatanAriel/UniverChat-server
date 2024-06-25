@@ -5,6 +5,7 @@ export type DateData = {
   minutes: number;
 };
 
+//need to move to the Message interface instead
 export type Message = {
   text: string;
   name: string;

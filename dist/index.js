@@ -10,7 +10,7 @@ const socket_io_1 = require("socket.io");
 const publicChatServices_1 = require("./src/BL/services/socketServices/publicChatServices");
 const app = (0, express_1.default)();
 const httpServer = (0, http_1.createServer)(app);
-const PORT = 4000;
+const PORT = process.env.PORT || 4001;
 app.use(require("cors")());
 app.use(express_1.default.json());
 const io = new socket_io_1.Server(httpServer, {

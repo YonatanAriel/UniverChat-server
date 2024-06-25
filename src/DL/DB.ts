@@ -12,8 +12,6 @@ const initializeDB = () => {
   createUsersTable(db);
   createMessagesTable(db);
   createChatRoomsTable(db);
-  const log = ChatRoomsController.readOne("10");
-  console.log(log?.name + " wwwwwwwwww");
 };
 
 // db.backup(`backup-${Date.now()}.db`)

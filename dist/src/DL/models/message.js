@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createMessagesTable = void 0;
 const createMessagesTable = (db) => {
     const query = `--sql
-CREATE TABLE IF NOt EXISTS messages (
+CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     --chat_room_id INTEGER NOT NULL,
     --user_id INTEGER NOT NULL,

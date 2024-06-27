@@ -13,7 +13,7 @@ export interface Message {
 
 export const createMessagesTable = (db: Database) => {
   const query = `--sql
-CREATE TABLE IF NOt EXISTS messages (
+CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     --chat_room_id INTEGER NOT NULL,
     --user_id INTEGER NOT NULL,

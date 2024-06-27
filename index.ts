@@ -2,10 +2,12 @@ import express, { Express, Request, Response } from "express";
 import { db, initializeDB } from "./src/DL/DB";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import { config } from "dotenv";
 import { publicChatSocketServices } from "./src/BL/services/socketServices/publicChatServices";
 
 const app: Express = express();
 const httpServer = createServer(app);
+const dotenv = config();
 const PORT = process.env.PORT || 4001;
 app.use(require("cors")());
 app.use(express.json());

@@ -1,2 +1,2 @@
 -- SQLite
-SELECT * FROM chat_rooms
+SELECT * FROM messages WHERE id = 1

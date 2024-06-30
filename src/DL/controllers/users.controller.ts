@@ -1,3 +1,4 @@
+import { convertDBRowToUser } from "../../BL/utils/convertDBRowToUser";
 import { db } from "../DB";
 import { User } from "../models/user";
 
@@ -9,9 +10,9 @@ class UsersController {
       columns.push("email");
       values.push(data.email);
     }
-    if (data.photoUrl) {
+    if (data.photo) {
       columns.push("photo_url");
-      values.push(data.photoUrl);
+      values.push(data.photo);
     }
 
     const statement = db.prepare(
@@ -26,18 +27,25 @@ class UsersController {
 
   static read(query: string = "SELECT * FROM users"): User[] {
     const statement = db.prepare(query);
-    const filteredRes = statement
+    const filteredRows = statement
       .all()
       .filter((item): item is User => item !== undefined);
-    console.log("filteredRes", filteredRes);
-    return filteredRes;
+    const users = convertDBRowToUser(filteredRows) as User[];
+    return users;
   }
 
-  static readOne(id: number): User | undefined {
-    const statement = db.prepare("SELECT * FROM users WHERE id  = ?");
-    const chatRoom = statement.get(id) as User | undefined;
-    return chatRoom;
+  static readOne(identifier: string, value: string): User | undefined {
+    const statement = db.prepare(`SELECT * FROM users WHERE ${identifier} = ?`);
+    const row = statement.get(value);
+    if (!row) return undefined;
+    const user = convertDBRowToUser(row) as User;
+    return user;
   }
+  // static readOne(id: number): User | undefined {
+  //   const statement = db.prepare("SELECT * FROM users WHERE id  = ?");
+  //   const chatRoom = statement.get(id) as User | undefined;
+  //   return chatRoom;
+  // }
 
   static updateOne(data: User, id: number) {
     const statement = db.prepare(
@@ -47,7 +55,7 @@ class UsersController {
       data.userName ?? null,
       data.password ?? null,
       data.email ?? null,
-      data.photoUrl ?? null,
+      data.photo ?? null,
       id
     );
     const hasUpdated = info.changes > 0;

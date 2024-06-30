@@ -5,7 +5,7 @@ export interface User {
   userName: string;
   password?: string;
   email?: string;
-  photoUrl?: string;
+  photo?: string;
   clientId?: string;
   isActive?: boolean;
 }

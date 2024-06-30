@@ -3,6 +3,7 @@ import Database from "better-sqlite3";
 import { createChatRoomsTable } from "./models/chat-room";
 import { createUsersTable } from "./models/user";
 import { createMessagesTable } from "./models/message";
+import UsersServices from "../BL/services/users.service";
 
 const db = new Database("univerchat.db", { verbose: console.log });
 db.pragma("journal_mode = WAL");

@@ -6,6 +6,13 @@ export const encryptPassword = (password: string) => {
   const hashedPassword = bcrypt.hashSync(password, SALT_ROUNDS);
   return hashedPassword;
 };
+export const comparePasswords = (
+  firstPassword: string,
+  secondPassword: string
+): boolean => {
+  const isPasswordMatch = bcrypt.compareSync(firstPassword, secondPassword);
+  return isPasswordMatch as boolean;
+};
 
 export const createToken = (data: { userName: string }) => {
   const SECRET = process.env.SECRET;

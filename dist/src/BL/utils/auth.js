@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createToken = exports.encryptPassword = void 0;
+exports.createToken = exports.comparePasswords = exports.encryptPassword = void 0;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const encryptPassword = (password) => {
@@ -9,6 +9,11 @@ const encryptPassword = (password) => {
     return hashedPassword;
 };
 exports.encryptPassword = encryptPassword;
+const comparePasswords = (firstPassword, secondPassword) => {
+    const isPasswordMatch = bcrypt.compareSync(firstPassword, secondPassword);
+    return isPasswordMatch;
+};
+exports.comparePasswords = comparePasswords;
 const createToken = (data) => {
     const SECRET = process.env.SECRET;
     const token = jwt.sign(data, SECRET, { expiresIn: "120d" });

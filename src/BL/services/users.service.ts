@@ -1,5 +1,5 @@
 import UsersController from "../../DL/controllers/users.controller";
-import { createToken, encryptPassword } from "../utils/auth";
+import { comparePasswords, createToken, encryptPassword } from "../utils/auth";
 import { uploadPhoto } from "./cloudinaryServices/uploadPhoto";
 
 interface SignInData {
@@ -26,6 +26,25 @@ class UsersServices {
   static getUserByUserName = (userName: string) => {
     const user = UsersController.readOne("user_name", userName);
     return user;
+  };
+
+  static signIn = (data: SignInData) => {
+    try {
+      if (!data.userName || !data.password) return { error: "Missing data" };
+      const user = this.getUserByUserName(data.userName);
+
+      if (!user || !user.password)
+        return { error: "Wrong username or password" };
+
+      const isPasswordMatch = comparePasswords(data.password, user.password);
+      if (!isPasswordMatch) return { error: "Wrong username or password" };
+
+      const userSQLId = user?.id;
+      const token = createToken({ userName: data.userName });
+      return { token, userSQLId };
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   static async signUp(data: SignUpData, photoPath: string | undefined) {

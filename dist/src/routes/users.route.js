@@ -15,33 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const users_service_1 = __importDefault(require("../BL/services/users.service"));
 const multer = require("multer");
-// const upload = multer({ dest: os.tmpdir() });
-// import { Multer } from "multer";
-// declare global {
-//   namespace Express {
-//     interface Request {
-//       file?: Multer.File;
-//     }
-//   }
-// }
 const upload = multer({ dest: "uploads/" });
-// const storage = multer.diskStorage({
-//   destination: function (
-//     req: Request,
-//     file: Express.Multer.File,
-//     cb: (error: Error | null, destination: string) => void
-//   ) {
-//     cb(null, "uploads/");
-//   },
-//   filename: function (
-//     req: Request,
-//     file: Express.Multer.File,
-//     cb: (error: Error | null, filename: string) => void
-//   ) {
-//     cb(null, Date.now() + "-" + file.originalname);
-//   },
-// });
-// const upload = multer({ storage: storage });
 const router = express_1.default.Router();
 // const {verify} = require("../auth")
 //
@@ -49,6 +23,15 @@ router.get("/", (req, res) => {
     try {
         const allUsers = users_service_1.default.getAllUsers();
         res.send(allUsers);
+    }
+    catch (err) {
+        res.status(400).send(err);
+    }
+});
+router.post("/sign-in", (req, res) => {
+    try {
+        const response = users_service_1.default.signIn(req.body);
+        res.send(response);
     }
     catch (err) {
         res.status(400).send(err);

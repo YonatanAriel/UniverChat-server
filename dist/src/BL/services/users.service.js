@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const users_controller_1 = __importDefault(require("../../DL/controllers/users.controller"));
 const auth_1 = require("../utils/auth");
@@ -39,6 +40,7 @@ class UsersServices {
         });
     }
 }
+_a = UsersServices;
 UsersServices.getAllUsers = () => {
     const allUsers = users_controller_1.default.read();
     return allUsers;
@@ -50,5 +52,23 @@ UsersServices.getUserById = (id) => {
 UsersServices.getUserByUserName = (userName) => {
     const user = users_controller_1.default.readOne("user_name", userName);
     return user;
+};
+UsersServices.signIn = (data) => {
+    try {
+        if (!data.userName || !data.password)
+            return { error: "Missing data" };
+        const user = _a.getUserByUserName(data.userName);
+        if (!user || !user.password)
+            return { error: "Wrong username or password" };
+        const isPasswordMatch = (0, auth_1.comparePasswords)(data.password, user.password);
+        if (!isPasswordMatch)
+            return { error: "Wrong username or password" };
+        const userSQLId = user === null || user === void 0 ? void 0 : user.id;
+        const token = (0, auth_1.createToken)({ userName: data.userName });
+        return { token, userSQLId };
+    }
+    catch (error) {
+        console.log(error);
+    }
 };
 exports.default = UsersServices;

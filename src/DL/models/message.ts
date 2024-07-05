@@ -7,6 +7,8 @@ export interface Message {
   userName?: string;
   msgText: string;
   timestamp: Date | string;
+  isPrivate: boolean;
+  to: string;
 }
 
 export const createMessagesTable = (db: Database) => {

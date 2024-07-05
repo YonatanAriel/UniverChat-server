@@ -3,7 +3,7 @@ import { db, initializeDB } from "./src/DL/DB";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { config } from "dotenv";
-import { publicChatSocketServices } from "./src/BL/services/socketServices/publicChatServices";
+import { socketServices } from "./src/BL/services/socketServices/socket.service";
 
 const app: Express = express();
 const httpServer = createServer(app);
@@ -22,7 +22,7 @@ const io = new Server(httpServer, {
 
 initializeDB();
 
-publicChatSocketServices(io);
+socketServices(io);
 
 app.use("/users", require("./src/routes/users.route"));
 // app.use("/messages", require("./routes/messages.route"));

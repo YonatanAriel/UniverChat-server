@@ -30,13 +30,15 @@ class UsersServices {
                 if (photoPath) {
                     data.photo = yield (0, uploadPhoto_1.uploadPhoto)(photoPath);
                 }
-                const userSQLId = users_controller_1.default.create(data);
-                if (!userSQLId)
+                const userId = users_controller_1.default.create(data);
+                if (!userId)
                     return { error: "Error in creating user" };
                 const token = (0, auth_1.createToken)({ userName: data.userName });
-                return { token, userSQLId };
+                return { token, userId };
             }
-            catch (err) { }
+            catch (err) {
+                console.log(err);
+            }
         });
     }
 }
@@ -63,9 +65,9 @@ UsersServices.signIn = (data) => {
         const isPasswordMatch = (0, auth_1.comparePasswords)(data.password, user.password);
         if (!isPasswordMatch)
             return { error: "Wrong username or password" };
-        const userSQLId = user === null || user === void 0 ? void 0 : user.id;
+        const userId = user === null || user === void 0 ? void 0 : user.id;
         const token = (0, auth_1.createToken)({ userName: data.userName });
-        return { token, userSQLId };
+        return { token, userId };
     }
     catch (error) {
         console.log(error);

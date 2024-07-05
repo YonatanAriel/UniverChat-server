@@ -39,9 +39,9 @@ class UsersServices {
       const isPasswordMatch = comparePasswords(data.password, user.password);
       if (!isPasswordMatch) return { error: "Wrong username or password" };
 
-      const userSQLId = user?.id;
+      const userId = user?.id;
       const token = createToken({ userName: data.userName });
-      return { token, userSQLId };
+      return { token, userId };
     } catch (error) {
       console.log(error);
     }
@@ -62,12 +62,14 @@ class UsersServices {
         data.photo = await uploadPhoto(photoPath);
       }
 
-      const userSQLId = UsersController.create(data);
-      if (!userSQLId) return { error: "Error in creating user" };
+      const userId = UsersController.create(data);
+      if (!userId) return { error: "Error in creating user" };
 
       const token = createToken({ userName: data.userName });
-      return { token, userSQLId };
-    } catch (err) {}
+      return { token, userId };
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

@@ -25,7 +25,7 @@ router.get("/", (req, res) => {
         res.send(allUsers);
     }
     catch (err) {
-        res.status(400).send(err);
+        res.sendStatus(400).send(err);
     }
 });
 router.post("/sign-in", (req, res) => {
@@ -34,7 +34,7 @@ router.post("/sign-in", (req, res) => {
         res.send(response);
     }
     catch (err) {
-        res.status(400).send(err);
+        res.sendStatus(400).send(err);
     }
 });
 router.post("/sign-up", upload.single("photo"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -46,7 +46,7 @@ router.post("/sign-up", upload.single("photo"), (req, res) => __awaiter(void 0, 
     }
     catch (err) {
         console.log(err);
-        res.status(400).send(err);
+        res.sendStatus(400).send(err);
     }
 }));
 module.exports = router;

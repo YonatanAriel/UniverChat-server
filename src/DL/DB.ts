@@ -4,6 +4,7 @@ import { createChatRoomsTable } from "./models/chat-room";
 import { createUsersTable } from "./models/user";
 import { createMessagesTable } from "./models/message";
 import UsersServices from "../BL/services/users.service";
+import ChatRoomsServices from "../BL/services/chat-rooms.service";
 
 const db = new Database("univerchat.db", { verbose: console.log });
 db.pragma("journal_mode = WAL");

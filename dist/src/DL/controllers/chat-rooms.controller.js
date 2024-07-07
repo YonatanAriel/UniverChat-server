@@ -17,7 +17,14 @@ class ChatRoomsController {
         console.log("filteredRes", filteredRes);
         return filteredRes;
     }
-    static readOne(id) {
+    static readOne(identifier, value) {
+        const statement = DB_1.db.prepare(`SELECT * FROM chat_rooms WHERE ${identifier} = ?`);
+        const row = statement.get(value);
+        if (!row)
+            return undefined;
+        return row;
+    }
+    static readOne2(id) {
         const statement = DB_1.db.prepare("SELECT * FROM chat_rooms WHERE id  = ?");
         const chatRoom = statement.get(id);
         return chatRoom;

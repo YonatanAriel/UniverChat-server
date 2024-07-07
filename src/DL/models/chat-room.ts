@@ -2,7 +2,7 @@ import { Database } from "better-sqlite3";
 
 export interface ChatRoom {
   id?: string;
-  name: string;
+  name?: string;
 }
 
 export const createChatRoomsTable = (db: Database) => {

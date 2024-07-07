@@ -12,7 +12,7 @@ router.get("/", (req: Request, res: Response) => {
     const allUsers = usersServices.getAllUsers();
     res.send(allUsers);
   } catch (err) {
-    res.status(400).send(err);
+    res.sendStatus(400).send(err);
   }
 });
 router.post("/sign-in", (req: Request, res: Response) => {
@@ -20,7 +20,7 @@ router.post("/sign-in", (req: Request, res: Response) => {
     const response = usersServices.signIn(req.body);
     res.send(response);
   } catch (err) {
-    res.status(400).send(err);
+    res.sendStatus(400).send(err);
   }
 });
 
@@ -34,7 +34,7 @@ router.post(
       res.send(response);
     } catch (err) {
       console.log(err);
-      res.status(400).send(err);
+      res.sendStatus(400).send(err);
     }
   }
 );

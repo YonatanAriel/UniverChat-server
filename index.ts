@@ -25,7 +25,7 @@ initializeDB();
 socketServices(io);
 
 app.use("/users", require("./src/routes/users.route"));
-// app.use("/messages", require("./routes/messages.route"));
+app.use("/messages", require("./src/routes/messages.route"));
 app.use("/chat-rooms", require("./src/routes/chat-rooms.route"));
 
 httpServer.listen(PORT, () => {

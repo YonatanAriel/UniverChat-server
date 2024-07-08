@@ -1,5 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { Message } from "../../../DL/models/message";
+import MessagesServices from "../messages.service";
 
 let roomsMessages = {
   public: [],
@@ -8,22 +9,25 @@ let roomsMessages = {
 
 export const socketServices = (io: Server) => {
   io.on("connection", (socket) => {
-    // socket.on("publicMessage", (data: Message) => {
-    //   io.emit("receiveMessage", data);
-    // });
-
     socket.on("send message", (data: Message) => {
+      console.log(data);
       const isPrivateMessage = data.isPrivate;
       console.log(`User ${socket.id} sent message ${data}`);
 
       if (!isPrivateMessage) {
-        io.to(data.to).emit("receive message", data);
+        console.log(`Emitting to room: ${String(data?.chatRoomId)}`);
+        io.to(String(data?.chatRoomId)).emit("receive message", data);
       } else {
+      }
+      const shouldSaveInDB = data.isLoggedIn;
+      if (shouldSaveInDB) {
+        console.log("need to store");
+        MessagesServices.addMessage(data);
       }
     });
 
-    socket.on("joinRoom", (room: string, callback) => {
-      socket.join(room);
+    socket.on("joinRoom", (room, callback) => {
+      socket.join(String(room));
       // callback(roomsMessages[room]);
       console.log(`User ${socket.id} joined room: ${room}`);
     });

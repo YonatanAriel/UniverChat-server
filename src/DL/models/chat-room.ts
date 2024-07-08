@@ -9,7 +9,7 @@ export const createChatRoomsTable = (db: Database) => {
   const query = `--sql
     CREATE TABLE IF NOT EXISTS chat_rooms (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL
+      name TEXT NOT NULL UNIQUE
     )
   `;
   // db.prepare(query).run();

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.socketServices = void 0;
 const messages_service_1 = __importDefault(require("../messages.service"));
+const users_service_1 = __importDefault(require("../users.service"));
 let roomsMessages = {
     public: [],
     loggedInPublic: [],
@@ -12,7 +13,10 @@ let roomsMessages = {
 const socketServices = (io) => {
     io.on("connection", (socket) => {
         socket.on("send message", (data) => {
+            var _a;
             console.log(data);
+            const userImg = (_a = users_service_1.default.getUserById(String(data.userId))) === null || _a === void 0 ? void 0 : _a.photo;
+            data.userImg = userImg;
             const isPrivateMessage = data.isPrivate;
             console.log(`User ${socket.id} sent message ${data}`);
             if (!isPrivateMessage) {

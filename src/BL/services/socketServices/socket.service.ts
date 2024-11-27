@@ -1,6 +1,7 @@
 import { Server, Socket } from "socket.io";
 import { Message } from "../../../DL/models/message";
 import MessagesServices from "../messages.service";
+import UsersServices from "../users.service";
 
 let roomsMessages = {
   public: [],
@@ -11,6 +12,8 @@ export const socketServices = (io: Server) => {
   io.on("connection", (socket) => {
     socket.on("send message", (data: Message) => {
       console.log(data);
+      const userImg = UsersServices.getUserById(String(data.userId))?.photo;
+      data.userImg = userImg;
       const isPrivateMessage = data.isPrivate;
       console.log(`User ${socket.id} sent message ${data}`);
 

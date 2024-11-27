@@ -18,7 +18,7 @@ app.use(express_1.default.json());
 const io = new socket_io_1.Server(httpServer, {
     /* options */
     cors: {
-        origin: "http://localhost:5173",
+        origin: ["http://localhost:5173", "http://localhost:5174"],
     },
 });
 (0, DB_1.initializeDB)();

@@ -9,6 +9,7 @@ export interface Message {
   timestamp: Date | string;
   isPrivate: boolean;
   isLoggedIn: boolean;
+  userImg?: string;
   // to: string;
 }
 

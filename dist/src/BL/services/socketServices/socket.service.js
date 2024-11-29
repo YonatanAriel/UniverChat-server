@@ -14,7 +14,6 @@ const socketServices = (io) => {
     io.on("connection", (socket) => {
         socket.on("send message", (data) => {
             var _a;
-            console.log(data);
             const userImg = (_a = users_service_1.default.getUserById(String(data.userId))) === null || _a === void 0 ? void 0 : _a.photo;
             data.userImg = userImg;
             const isPrivateMessage = data.isPrivate;

@@ -11,7 +11,6 @@ let roomsMessages = {
 export const socketServices = (io: Server) => {
   io.on("connection", (socket) => {
     socket.on("send message", (data: Message) => {
-      console.log(data);
       const userImg = UsersServices.getUserById(String(data.userId))?.photo;
       data.userImg = userImg;
       const isPrivateMessage = data.isPrivate;

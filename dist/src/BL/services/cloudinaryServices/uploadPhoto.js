@@ -1,6 +1,4 @@
 "use strict";
-// import { v2 as cloudinary } from "cloudinary";
-// import fs from "fs";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -15,18 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadPhoto = void 0;
-// cloudinary.config({
-//   cloud_name: process.env.CLOUDINARY_NAME,
-//   api_key: process.env.CLOUDINARY_KEY,
-//   api_secret: process.env.CLOUDINARY_SECRET,
-// });
-// export const uploadPhoto = async (filePath: string) => {
-//   console.log("here!", process.env.CLOUDINARY_NAME);
-//   const result = await cloudinary.uploader.upload(filePath);
-//   const photoUrl = result.secure_url;
-//   await fs.promises.unlink(filePath);
-//   return photoUrl;
-// };
 const cloudinary_1 = require("cloudinary");
 const fs_1 = __importDefault(require("fs"));
 const uploadPhoto = (filePath) => __awaiter(void 0, void 0, void 0, function* () {

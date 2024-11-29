@@ -15,7 +15,9 @@ class MessagesServices {
   static getPrevMessages = (numberOfMessages: number, chatRoomId: number) => {
     const query = `SELECT * FROM messages WHERE chat_room_id = ${chatRoomId} ORDER BY timestamp DESC LIMIT ${numberOfMessages}`;
     const prevMessages = MessagesController.read(query);
-    return prevMessages.reverse();
+    if (!prevMessages) return null;
+    if (Array.isArray(prevMessages)) return prevMessages.reverse();
+    return prevMessages;
   };
 }
 

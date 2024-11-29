@@ -17,6 +17,10 @@ MessagesServices.addMessage = (data) => {
 MessagesServices.getPrevMessages = (numberOfMessages, chatRoomId) => {
     const query = `SELECT * FROM messages WHERE chat_room_id = ${chatRoomId} ORDER BY timestamp DESC LIMIT ${numberOfMessages}`;
     const prevMessages = messages_controller_1.default.read(query);
-    return prevMessages.reverse();
+    if (!prevMessages)
+        return null;
+    if (Array.isArray(prevMessages))
+        return prevMessages.reverse();
+    return prevMessages;
 };
 exports.default = MessagesServices;

@@ -1,5 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const convertDBRowToMessage_1 = __importDefault(require("../../BL/utils/convertDBRowToMessage"));
 const DB_1 = require("../DB");
 class MessagesController {
     static create(data) {
@@ -11,14 +15,16 @@ class MessagesController {
     }
     static read(query = "SELECT * FROM messages") {
         const statement = DB_1.db.prepare(query);
-        const filteredRes = statement
+        const filteredRows = statement
             .all()
             .filter((item) => item !== undefined);
-        return filteredRes;
+        const messages = (0, convertDBRowToMessage_1.default)(filteredRows);
+        return messages;
     }
     static readOne(id) {
         const statement = DB_1.db.prepare("SELECT * FROM messages WHERE id  = ?");
-        const message = statement.get(id);
+        const dbRow = statement.get(id);
+        const message = (0, convertDBRowToMessage_1.default)(dbRow);
         return message;
     }
     static updateOne(id, msgText) {

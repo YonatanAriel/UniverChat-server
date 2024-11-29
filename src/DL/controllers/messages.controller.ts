@@ -1,3 +1,5 @@
+import convertDBRowToMessage from "../../BL/utils/convertDBRowToMessage";
+import { MessageRow } from "../../types/types";
 import { db } from "../DB";
 import { Message } from "../models/message";
 
@@ -12,17 +14,19 @@ class MessagesController {
     return rowId;
   }
 
-  static read(query: string = "SELECT * FROM messages"): Message[] {
+  static read(query: string = "SELECT * FROM messages") {
     const statement = db.prepare(query);
-    const filteredRes = statement
+    const filteredRows = statement
       .all()
-      .filter((item): item is Message => item !== undefined);
-    return filteredRes;
+      .filter((item): item is MessageRow => item !== undefined);
+    const messages = convertDBRowToMessage(filteredRows);
+    return messages;
   }
 
-  static readOne(id: number): Message | undefined {
+  static readOne(id: number) {
     const statement = db.prepare("SELECT * FROM messages WHERE id  = ?");
-    const message = statement.get(id) as Message | undefined;
+    const dbRow = statement.get(id) as MessageRow | undefined;
+    const message = convertDBRowToMessage(dbRow);
     return message;
   }
 

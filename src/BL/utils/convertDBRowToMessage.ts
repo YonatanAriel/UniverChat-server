@@ -1,7 +1,11 @@
-const convertDBRowToMessage = (rowOrRows) => {
+import { MessageRow } from "../../types/types";
+
+const convertDBRowToMessage = (
+  rowOrRows: MessageRow | MessageRow[] | undefined
+) => {
   if (!rowOrRows) return undefined;
 
-  const transformRow = (row) => ({
+  const transformRow = (row: MessageRow) => ({
     id: row.id,
     chatRoomId: row.chat_room_id,
     msgText: row.msg_text,

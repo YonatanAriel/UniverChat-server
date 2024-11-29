@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const DB_1 = require("../DB");
 class MessagesController {
     static create(data) {
-        const statement = DB_1.db.prepare("INSERT INTO messages (msg_text, timestamp, user_id, chat_room_id) VALUES (?,?,?,?)");
-        const { msgText, timestamp, userId, chatRoomId } = data;
-        const info = statement.run(msgText, timestamp, userId, chatRoomId);
+        const statement = DB_1.db.prepare("INSERT INTO messages (msg_text, timestamp, user_id, chat_room_id, user_photo) VALUES (?,?,?,?,?)");
+        const { msgText, timestamp, userId, chatRoomId, userImg } = data;
+        const info = statement.run(msgText, timestamp, userId, chatRoomId, userImg);
         const rowId = info.lastInsertRowid;
         return rowId;
     }

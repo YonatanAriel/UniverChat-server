@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS messages (
     user_id INTEGER NOT NULL,
     msg_text TEXT NOT NULL,
     photo_url TEXT,
+    user_photo TEXT,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(chat_room_id) REFERENCES chat_rooms(id)

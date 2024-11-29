@@ -4,10 +4,10 @@ import { Message } from "../models/message";
 class MessagesController {
   static create(data: Message) {
     const statement = db.prepare(
-      "INSERT INTO messages (msg_text, timestamp, user_id, chat_room_id) VALUES (?,?,?,?)"
+      "INSERT INTO messages (msg_text, timestamp, user_id, chat_room_id, user_photo) VALUES (?,?,?,?,?)"
     );
-    const { msgText, timestamp, userId, chatRoomId } = data;
-    const info = statement.run(msgText, timestamp, userId, chatRoomId);
+    const { msgText, timestamp, userId, chatRoomId, userImg } = data;
+    const info = statement.run(msgText, timestamp, userId, chatRoomId, userImg);
     const rowId = info.lastInsertRowid;
     return rowId;
   }

@@ -19,9 +19,9 @@ const initializeDB = () => {
   //     DROP TABLE IF EXISTS chat_rooms;
   //   `);
 
-  db.exec(`
-       DROP TABLE IF EXISTS messages;
-    `);
+  // db.exec(`
+  //      DROP TABLE IF EXISTS messages;
+  //   `);
   createUsersTable(db);
   createMessagesTable(db);
   createChatRoomsTable(db);

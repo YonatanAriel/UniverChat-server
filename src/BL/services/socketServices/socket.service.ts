@@ -30,6 +30,17 @@ export const socketServices = (io: Server) => {
 
     socket.on("joinRoom", (room, callback) => {
       socket.join(String(room));
+
+      if (room === 9) {
+        //only for now, when will be more chats with logged in users, i should fetch the prev messages as well
+        try {
+          const prevMessages = MessagesServices.getPrevMessages(50, 9);
+          socket.emit("previous messages", prevMessages);
+        } catch (e) {
+          console.error("error fetching previous messages:", e);
+        }
+      }
+
       // callback(roomsMessages[room]);
       console.log(`User ${socket.id} joined room: ${room}`);
     });

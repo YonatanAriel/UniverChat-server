@@ -62,3 +62,5 @@ class TranslationQueue {
     this.processing = false;
   }
 }
+
+export default new TranslationQueue();

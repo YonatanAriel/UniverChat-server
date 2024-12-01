@@ -14,3 +14,11 @@ export type MessageRow = {
   user_photo?: string | null;
   timestamp: string;
 };
+
+type TranslationResponse = {
+  translatedText: string;
+  detectedLanguage?: {
+    language: string;
+    confidence: number;
+  };
+};

@@ -15,7 +15,7 @@ export type MessageRow = {
   timestamp: string;
 };
 
-type TranslationResponse = {
+export type TranslationResponse = {
   translatedText: string;
   detectedLanguage?: {
     language: string;

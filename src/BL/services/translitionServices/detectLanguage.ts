@@ -1,7 +1,5 @@
 import axios from "axios";
-
-const translationApiUrl =
-  process.env.LIBRETRANSLATE_URL || "http://localhost:5000";
+import { translationApiUrl } from "../../../Constants";
 
 const detectLanguage = async (text: string): Promise<string> => {
   try {
@@ -14,3 +12,5 @@ const detectLanguage = async (text: string): Promise<string> => {
     return "en"; // Default to English if detection fails
   }
 };
+
+export default detectLanguage;

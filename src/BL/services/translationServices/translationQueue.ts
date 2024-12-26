@@ -1,4 +1,5 @@
 import { Message } from "../../../DL/models/message";
+import MessagesServices from "../messages.service";
 import translateText from "./translateMessage";
 
 class TranslationQueue {
@@ -44,16 +45,16 @@ class TranslationQueue {
         );
 
         // Store translated messages
-        await Promise.all(
-          translations.map(async (result) => {
-            await MessagesServices.updateMessageTranslation(
-              //need to add this function! (updateMessageTranslation)
-              result.originalMessage.id,
-              result.translatedText,
-              result.detectedLanguage
-            );
-          })
-        );
+        // await Promise.all(
+        //   translations.map(async (result) => {
+        //     await MessagesServices.updateMessageTranslation(
+        //need to add this function! (updateMessageTranslation)
+        //       result.originalMessage.id,
+        //       result.translatedText,
+        //       result.detectedLanguage
+        //     );
+        //   })
+        // );
       } catch (e) {
         console.error("Batch translation error", e);
       }

@@ -14,7 +14,6 @@ class ChatRoomsController {
         const filteredRes = statement
             .all()
             .filter((item) => item !== undefined);
-        console.log("filteredRes", filteredRes);
         return filteredRes;
     }
     static readOne(identifier, value) {

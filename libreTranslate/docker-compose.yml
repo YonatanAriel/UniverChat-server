@@ -1,0 +1,12 @@
+version: "3"
+services:
+  libretranslate:
+    image: libretranslate/libretranslate:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - LT_DISABLE_WEB_UI=true
+      - LT_API_KEYS=false
+    volumes:
+      - ./data:/home/app/data
+    restart: unless-stopped

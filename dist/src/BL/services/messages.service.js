@@ -23,4 +23,5 @@ MessagesServices.getPrevMessages = (numberOfMessages, chatRoomId) => {
         return prevMessages.reverse();
     return prevMessages;
 };
+MessagesServices.updateMessageTranslation = () => { };
 exports.default = MessagesServices;

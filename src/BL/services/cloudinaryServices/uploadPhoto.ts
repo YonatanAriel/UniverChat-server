@@ -5,7 +5,7 @@ export const uploadPhoto = async (filePath: string) => {
   reconfigureCloudinary();
   checkIfFileExists(filePath);
   const result = await cloudinary.uploader.upload(filePath, {
-    folder: "your_folder_name",
+    folder: "main_folder",
   });
   await fs.promises.unlink(filePath);
   return result.secure_url;

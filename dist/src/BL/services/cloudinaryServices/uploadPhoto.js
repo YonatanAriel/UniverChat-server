@@ -19,7 +19,7 @@ const uploadPhoto = (filePath) => __awaiter(void 0, void 0, void 0, function* ()
     reconfigureCloudinary();
     checkIfFileExists(filePath);
     const result = yield cloudinary_1.v2.uploader.upload(filePath, {
-        folder: "your_folder_name",
+        folder: "main_folder",
     });
     yield fs_1.default.promises.unlink(filePath);
     return result.secure_url;

@@ -15,7 +15,6 @@ class ChatRoomsController {
     const filteredRes = statement
       .all()
       .filter((item): item is ChatRoom => item !== undefined);
-    console.log("filteredRes", filteredRes);
     return filteredRes;
   }
 

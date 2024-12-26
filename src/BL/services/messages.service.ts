@@ -19,6 +19,8 @@ class MessagesServices {
     if (Array.isArray(prevMessages)) return prevMessages.reverse();
     return prevMessages;
   };
+
+  static updateMessageTranslation = () => {};
 }
 
 export default MessagesServices;

@@ -6,6 +6,7 @@ const detectLanguage = async (text: string): Promise<string> => {
     const res = await axios.post(`${translationApiUrl}/detect`, {
       q: text,
     });
+    console.log(res.data[0].language);
     return res.data[0].language;
   } catch (e) {
     console.error("Language detection error:", e);

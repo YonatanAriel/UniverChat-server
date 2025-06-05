@@ -19,6 +19,7 @@ const detectLanguage = (text) => __awaiter(void 0, void 0, void 0, function* () 
         const res = yield axios_1.default.post(`${Constants_1.translationApiUrl}/detect`, {
             q: text,
         });
+        console.log(res.data[0].language);
         return res.data[0].language;
     }
     catch (e) {

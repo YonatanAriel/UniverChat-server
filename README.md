@@ -1,16 +1,3 @@
----
-post_title: "UniverChat — Multilingual Real-Time Chat Server"
-author1: "Yonatan Ariel"
-post_slug: "univerchat-multilingual-server"
-microsoft_alias: "YonatanAriel"
-featured_image: "/assets/univerchat-featured.png"
-categories: ["chat", "backend", "translation"]
-tags: ["univerchat", "translation", "libretranslate", "socket.io", "typescript"]
-ai_note: "yes"
-summary: "Server for UniverChat providing real-time multilingual chat with translations powered by LibreTranslate and Socket.IO. Includes APIs for language preferences and message translations."
-post_date: 2025-08-28
----
-
 # UniverChat — Multilingual Real-Time Chat Server
 
 This repository implements the backend server for UniverChat, a real-time chat application that supports per-user language preferences and automatic translations using LibreTranslate.
